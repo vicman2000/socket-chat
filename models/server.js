@@ -1,53 +1,34 @@
 const express = require("express");
+const cors = require('cors');
 
 class Server {
   constructor() {
     this.app = express();
-        this.port = process.env.PORT;
+      this.port = process.env.PORT;
+      this.usuariosRouter = '/api/usuarios';
       
     //Middlewares -- Aplicaciones que se ejecutan cuando se levanta el servidor
       this.middlewares();
+      
       
       //Rutas del APP 
     this.routes();
     }
     
     middlewares() {
+        // Cors
+        this.app.use(cors());
+        
+        //Lectura y parseo del body
+        this.app.use(express.json());
+        
+        // Directorio público
         this.app.use(express.static('public'));
+
     }
 
   routes() {
-    this.app.get("/api", (req, res) => {
-      //res.send("Hola desde Api");
-        res.json({
-            msg: 'get API'
-        })
-    });
-    this.app.put("/api", (req, res) => {
-      //res.send("Hola desde Api");
-        res.json({
-            msg: 'put API'
-        })
-    });
-    this.app.post("/api", (req, res) => {
-      //res.send("Hola desde Api");
-        res.json({
-            msg: 'post API'
-        })
-    });
-    this.app.delete("/api", (req, res) => {
-      //res.send("Hola desde Api");
-        res.json({
-            msg: 'delete API'
-        })
-    });
-    this.app.patch("/api", (req, res) => {
-      //res.send("Hola desde Api");
-        res.json({
-            msg: 'patch API'
-        })
-    });
-      
+      this.app.use(this.usuariosRouter, require('../src/routes/usuarios.route'));
       
   }
 
