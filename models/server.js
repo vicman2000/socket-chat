@@ -18,8 +18,37 @@ class Server {
 
   routes() {
     this.app.get("/api", (req, res) => {
-      res.send("Hola desde Api");
+      //res.send("Hola desde Api");
+        res.json({
+            msg: 'get API'
+        })
     });
+    this.app.put("/api", (req, res) => {
+      //res.send("Hola desde Api");
+        res.json({
+            msg: 'put API'
+        })
+    });
+    this.app.post("/api", (req, res) => {
+      //res.send("Hola desde Api");
+        res.json({
+            msg: 'post API'
+        })
+    });
+    this.app.delete("/api", (req, res) => {
+      //res.send("Hola desde Api");
+        res.json({
+            msg: 'delete API'
+        })
+    });
+    this.app.patch("/api", (req, res) => {
+      //res.send("Hola desde Api");
+        res.json({
+            msg: 'patch API'
+        })
+    });
+      
+      
   }
 
   listen() {
